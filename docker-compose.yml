@@ -1,0 +1,13 @@
+version: '3'
+
+services:
+  database:
+    image: postgres
+    environment:
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: codechella
+    volumes:
+    - db-volume:/var/lib/postgresql/data
+
+volumes:
+  db-volume:

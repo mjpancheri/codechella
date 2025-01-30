@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SSE Example</title>
+</head>
+<body>
+<div id="events"></div>
+<script>
+    const eventSource = new EventSource('http://localhost:8080/test/sse');
+
+    eventSource.onmessage = function(event) {
+        const newElement = document.createElement("div");
+        newElement.textContent = event.data;
+        document.getElementById("events").appendChild(newElement);
+    };
+</script>
+</body>
+</html>
