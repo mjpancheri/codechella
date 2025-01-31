@@ -54,4 +54,17 @@ public class EventoService {
         return repository.findById(id)
                 .flatMap(evento -> TraducaoTexto.obterTraducaoMyMemory(evento.getDescricao(), idioma));
     }
+
+    public Mono<EventoDto> alterar(Long id, EventoDto dto) {
+        return repository.findById(id)
+                .switchIfEmpty(Mono.error(new ResponseStatusException(HttpStatus.NOT_FOUND, "Id do evento não encontrado.")))
+                .flatMap(eventoExistente -> {
+                    eventoExistente.setTipo(dto.tipo());
+                    eventoExistente.setNome(dto.nome());
+                    eventoExistente.setData(dto.data());
+                    eventoExistente.setDescricao(dto.descricao());
+                    return repository.save(eventoExistente);
+                })
+                .map(EventoDto::toDto);
+    }
 }
