@@ -1,6 +1,7 @@
 package br.com.alura.codechella.service;
 
 
+import br.com.alura.codechella.common.TraducaoTexto;
 import br.com.alura.codechella.model.Venda;
 import br.com.alura.codechella.model.dto.CompraDto;
 import br.com.alura.codechella.model.dto.IngressoDto;

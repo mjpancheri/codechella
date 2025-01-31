@@ -1,8 +1,6 @@
 package br.com.alura.codechella.controller;
 
-import br.com.alura.codechella.model.Evento;
 import br.com.alura.codechella.model.dto.EventoDto;
-import br.com.alura.codechella.service.EventoRepository;
 import br.com.alura.codechella.service.EventoService;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -17,7 +15,6 @@ import reactor.core.publisher.Mono;
 import reactor.core.publisher.Sinks;
 
 import java.time.Duration;
-import java.util.stream.Stream;
 
 @RestController
 @RequestMapping("/eventos")
@@ -56,5 +53,15 @@ public class EventoController {
     @DeleteMapping(value = "/{id}")
     public Mono<Void> excluir(@PathVariable Long id) {
         return service.excluir(id);
+    }
+
+    @GetMapping("/{id}/traduzir/{idioma}")
+    public Mono<String> obterTraducao(@PathVariable Long id, @PathVariable String idioma) {
+        return service.obterTraducao(id, idioma);
+    }
+
+    @GetMapping("/{id}/traduzirV2/{idioma}")
+    public Mono<String> obterTraducaoV2(@PathVariable Long id, @PathVariable String idioma) {
+        return service.obterTraducaoMyMemory(id, idioma);
     }
 }

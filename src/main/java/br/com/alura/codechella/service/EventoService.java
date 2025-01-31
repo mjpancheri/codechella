@@ -1,5 +1,6 @@
 package br.com.alura.codechella.service;
 
+import br.com.alura.codechella.common.TraducaoTexto;
 import br.com.alura.codechella.model.TipoEvento;
 import br.com.alura.codechella.model.dto.EventoDto;
 import org.springframework.http.HttpStatus;
@@ -42,5 +43,15 @@ public class EventoService {
         TipoEvento tipoEvento = TipoEvento.valueOf(tipo.toUpperCase());
         return repository.findByTipo(tipoEvento)
                 .map(EventoDto::toDto);
+    }
+
+    public Mono<String> obterTraducao(Long id, String idioma) {
+        return repository.findById(id)
+                .flatMap(evento -> TraducaoTexto.obterTraducao(evento.getDescricao(), idioma));
+    }
+
+    public Mono<String> obterTraducaoMyMemory(Long id, String idioma) {
+        return repository.findById(id)
+                .flatMap(evento -> TraducaoTexto.obterTraducaoMyMemory(evento.getDescricao(), idioma));
     }
 }

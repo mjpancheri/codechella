@@ -1,4 +1,4 @@
-package br.com.alura.codechella.consumer;
+package br.com.alura.codechella.common;
 
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.codec.ServerSentEvent;
